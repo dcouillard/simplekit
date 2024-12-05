@@ -19,12 +19,7 @@ export const fundamentalTranslator = {
       case "mousedown":
       case "mouseup":
       case "mousemove":
-        return new SKMouseEvent(
-          fe.type,
-          fe.timeStamp,
-          fe.x || 0,
-          fe.y || 0
-        );
+        return new SKMouseEvent(fe.type, fe.timeStamp, fe.x || 0, fe.y || 0);
         break;
       case "keydown":
       case "keyup":
@@ -81,12 +76,7 @@ export const clickTranslator = {
           this.state = "IDLE";
         } else if (fe.type == "mouseup") {
           this.state = "IDLE";
-          return new SKMouseEvent(
-            "click",
-            fe.timeStamp,
-            fe.x || 0,
-            fe.y || 0
-          );
+          return new SKMouseEvent("click", fe.timeStamp, fe.x || 0, fe.y || 0);
         }
         break;
     }
@@ -167,12 +157,7 @@ export const dragTranslator = {
             this.movementThreshold
         ) {
           this.state = "DRAG";
-          return {
-            type: "dragstart",
-            timeStamp: fe.timeStamp,
-            x: fe.x,
-            y: fe.y,
-          } as SKMouseEvent;
+          return new SKMouseEvent("dragstart", fe.timeStamp, fe.x, fe.y);
         }
 
         break;
@@ -187,12 +172,7 @@ export const dragTranslator = {
           } as SKMouseEvent;
         } else if (fe.type == "mouseup") {
           this.state = "IDLE";
-          return {
-            type: "dragend",
-            timeStamp: fe.timeStamp,
-            x: fe.x,
-            y: fe.y,
-          } as SKMouseEvent;
+          return new SKMouseEvent("dragend", fe.timeStamp, fe.x, fe.y);
         }
 
         break;
